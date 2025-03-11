@@ -1,0 +1,24 @@
+version: '3'
+
+services:
+  relay:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "42421:42421"
+      - "80:80"
+      - "443:443"
+    restart: always
+    command:
+      - "--tcp-port=42421"
+      - "--http-port=80"
+      - "--https-port=443"
+      - "--tcp=true"
+      - "--http=true"
+      - "--https=false"  # Set to true if you have TLS certificates
+      # Uncomment the following lines if you have TLS certificates
+      # - "--tls-cert=/certs/fullchain.pem"
+      # - "--tls-key=/certs/privkey.pem"
+    # volumes:
+    #   - /path/to/certs:/certs  # Uncomment if you have TLS certificates 
